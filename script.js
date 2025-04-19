@@ -126,7 +126,7 @@ predictButton.addEventListener('click', async function() {
             const formData = new FormData();
             formData.append('file', file);
 
-            const response = await fetch('http://localhost:8000/predict', {
+            const response = await fetch('https://leaf-scan.onrender.com/predict', {
                 method: 'POST',
                 body: formData
             });
