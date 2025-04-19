@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chili Leaf Disease Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <span>LeafScan</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#diseases">Diseases</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div id="home" class="hero-section">
+        <div class="hero-content animate__animated animate__fadeIn">
+            <h1>Chili Leaf Disease Detection</h1>
+            <p>Advanced AI-powered detection system for identifying and treating chili plant diseases</p>
+            <button class="scroll-button">
+                <span>Get Started</span>
+                <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="upload-container">
+        <div class="upload-section animate__animated animate__fadeInUp">
+            <h2><i class="fas fa-upload"></i> Upload Chili Leaf Image</h2>
+            <div class="dropzone" id="dropzone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag and drop your image here or click to browse</p>
+                <input type="file" id="imageUpload" accept="image/*">
+            </div>
+            <button id="predictButton" class="predict-btn">
+                <span>Analyze Leaf</span>
+                <i class="fas fa-microscope"></i>
+            </button>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Analyzing leaf image...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-section" style="display: none;">
+        <div class="results-content">
+            <div class="image-container">
+                <h2>Uploaded Image</h2>
+                <div class="image-preview">
+                    <img id="uploadedImage" alt="Uploaded Leaf Image">
+                </div>
+            </div>
+            <div class="details-container">
+                <div class="result-card disease">
+                    <div class="card-header">
+                        <i class="fas fa-viruses"></i>
+                        <h2>Disease</h2>
+                    </div>
+                    <div class="card-body">
+                        <p id="disease">-</p>
+                    </div>
+                </div>
+                
+                <div class="result-card confidence">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        <h2>Confidence</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                        <p id="confidence">-</p>
+                    </div>
+                </div>
+                
+                <div class="result-card heatmap">
+                    <div class="card-header">
+                        <i class="fas fa-temperature-high"></i>
+                        <h2>XAI Visualization</h2>
+                    </div>
+                    <div class="card-body">
+                        <img id="heatmap" alt="Heatmap">
+                    </div>
+                </div>
+                
+                <div class="result-card recommendation">
+                    <div class="card-header">
+                        <i class="fas fa-flask"></i>
+                        <h2>Recommendation</h2>
+                    </div>
+                    <div class="card-body">
+                        <p id="recommendation">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="about-section">
+        <h2>About Chili Leaf Disease Detection</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="static/about.jpg" alt="About Image">
+            </div>
+            <div class="about-text">
+                <p>Our advanced AI system helps farmers and gardeners identify diseases affecting chili plants through image analysis. Using deep learning, we provide accurate diagnoses and treatment recommendations to help maintain healthy crops.</p>
+                <p>Upload a clear image of the affected leaf to get instant results and recommendations for treatment. Our technology leverages a trained neural network model, capable of detecting six common chili diseases with high precision.</p>
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li><strong>Real-Time Analysis:</strong> Get immediate insights with our fast-processing algorithm.</li>
+                    <li><strong>Visual Explanations:</strong> Grad-CAM technology highlights areas of the leaf that indicate disease, aiding in understanding the diagnosis.</li>
+                    <li><strong>Custom Recommendations:</strong> Tailored advice based on the identified disease to optimize crop health.</li>
+                    <li><strong>Accessibility:</strong> Available online and offline with a simple interface for all users.</li>
+                </ul>
+                <p>Developed with cutting-edge research, this tool aims to reduce crop loss and improve agricultural productivity. Whether you're a small-scale gardener or a large-scale farmer, our system is designed to support your efforts in sustainable farming.</p>
+                <p>Stay informed with regular updates as we continue to enhance our model with new data and improved accuracy. Join us in revolutionizing chili farming with technology!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="diseases" class="diseases-section">
+        <h2>Common Chili Diseases</h2>
+        <div class="disease-cards">
+            <div class="disease-card">
+                <img src="/static/upload/Bacterial Spot00002_zoomed_1979.jpg" alt="Bacterial Spot">
+                <h3>Bacterial Spot</h3>
+                <p>Small, dark, water-soaked spots that eventually turn brown.</p>
+            </div>
+            <div class="disease-card">
+                <img src="/static/upload/Curl Virus00004_shifted_1234.jpg" alt="Curl Virus">
+                <h3>Curl Virus</h3>
+                <p>Upward curling of leaves with yellowing and stunted growth.</p>
+            </div>
+            <div class="disease-card">
+                <img src="/static/upload/Cercospora Leaf Spot00002_zoomed_10.jpg" alt="Cercospora Leaf Spot">
+                <h3>Cercospora Leaf Spot</h3>
+                <p>Circular spots with light centers and dark borders.</p>
+            </div>
+            <div class="disease-card">
+                <img src="/static/upload/White spot00003_rotated_13.jpg" alt="White Spot">
+                <h3>White Spot</h3>
+                <p>White, powdery spots on leaf surfaces.</p>
+            </div>
+            <div class="disease-card">
+                <img src="/static/upload/Nutrition Deficiency00005_flipped_208.jpg" alt="Nutrition Deficiency">
+                <h3>Nutrition Deficiency</h3>
+                <p>Yellowing leaves, stunted growth, or discoloration due to lack of essential nutrients like nitrogen or potassium.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form action="https://formspree.io/f/mqapreek" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+                <p id="formMessage" style="display: none; margin-top: 1rem;"></p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LeafScan</h3>
+                <p>Advanced AI-powered detection system for identifying and treating chili plant diseases.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#diseases">Diseases</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="https://x.com/KeerthanaB15"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/keerthana_b_15/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/keerthana-b-904b79256/"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Developed by Keerthana B © 2025</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'932ab0807e12bcd8',t:'MTc0NTA0Nzc1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
